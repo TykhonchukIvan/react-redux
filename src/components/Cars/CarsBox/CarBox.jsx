@@ -1,22 +1,32 @@
 import React from 'react';
-import './Car.less'
+import Radium from 'radium';
+import './CarBox.less'
 
-export default ({name, year, onChangeTitle, onChangeName, onDelete, carContainerStyle}) => {
+const CarBox = ({name, year, onChangeTitle, onChangeName, onDelete, carContainerStyle}) => {
 
   const inputClasses = ['input']
 
-  if(name !== ''){
+  if (name !== '') {
     inputClasses.push('green')
   } else {
     inputClasses.push('red')
   }
 
-  if(name.length > 4) {
+  if (name.length > 4) {
     inputClasses.push('bold')
   }
 
+  const styles = {
+    ...carContainerStyle,
+    border: '1px solid #ccc',
+    ':hover': {
+      border: '1px solid #aaa',
+      boxShadow: '0 4px 15px 0 rgba(0,0,0, .25)'
+    }
+  }
+
   return (
-    <div style={carContainerStyle} className={'car-wrapper'}>
+    <div style={styles} className={'car-wrapper'}>
       <h2>Car name: {name}</h2>
       <p>Year: {year}</p>
       <input
@@ -30,3 +40,5 @@ export default ({name, year, onChangeTitle, onChangeName, onDelete, carContainer
     </div>
   )
 }
+
+export default Radium(CarBox);

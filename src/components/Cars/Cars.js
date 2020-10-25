@@ -1,7 +1,7 @@
 import React from 'react';
-import Car from './components/Car/Car';
+import CarBox from './CarsBox/CarBox.jsx';
 
-class Main extends React.Component {
+class Cars extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,13 +64,13 @@ class Main extends React.Component {
     if (this.state.showCars) {
       cars = this.state.cars.map((car, index) => {
         return (
-          <Car key={index}
-               name={car.name}
-               year={car.year}
-               onChangeTitle={() => this.changeTitleHandler(car.name)}
-               onChangeName={(event) => this.onChangeName(event.target.value, index)}
-               onDelete={this.onDeleteHandler.bind(this, index)}
-               carContainerStyle={carContainerStyle}
+          <CarBox key={index}
+                  name={car.name}
+                  year={car.year}
+                  onChangeTitle={() => this.changeTitleHandler(car.name)}
+                  onChangeName={(event) => this.onChangeName(event.target.value, index)}
+                  onDelete={this.onDeleteHandler.bind(this, index)}
+                  carContainerStyle={carContainerStyle}
           />)
       })
     }
@@ -81,7 +81,7 @@ class Main extends React.Component {
           <h1>{this.state.pageTitle}</h1>
           <button onClick={this.toggleCarsHandler}>Toggle Cars</button>
         </div>
-        <div className={'container__cars'} >
+        <div className={'container__cars'}>
           {cars}
         </div>
       </div>
@@ -89,4 +89,4 @@ class Main extends React.Component {
   }
 }
 
-export default Main
+export default Cars;
