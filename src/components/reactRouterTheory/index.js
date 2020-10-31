@@ -1,7 +1,8 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {Route, NavLink} from 'react-router-dom';
 import About from './About/About';
 import Card from './Card/Card';
+import './routStyle.less';
 
 export default class RoutTheory extends React.Component {
 
@@ -15,25 +16,41 @@ export default class RoutTheory extends React.Component {
 
     return (
       <>
-        <Route path='/about' exact render={() => <h1>Home</h1>}/>
-        <Route path='/' exact component={About}/>
-        <Route path='/cars' exact component={Card}/>
-
         <div>
           <nav>
             <ul>
               <li>
-                <a href='/'>Home</a>
+                <NavLink
+                  to={'/'}
+                  exact
+                  activeClassName={'wfm-active'}>
+                  Home</NavLink>
               </li>
               <li>
-                <a href='/about'>About</a>
+                <NavLink
+                  to={'/about'}
+                  exact
+                  activeStyle={{color: 'blue'}}
+                >About</NavLink>
               </li>
               <li>
-                <a href='/cars'>About</a>
+                <NavLink
+                  to={{
+                    pathname:'/cars',
+                    search:'?a=1&b=2',
+                    hash:'wfm-hash'
+                  }}
+                  exact
+                >Cars</NavLink>
               </li>
             </ul>
           </nav>
           <hr/>
+
+          <Route path='/' exact render={() => <h1>Home</h1>}/>
+          <Route path='/about' exact component={About}/>
+          <Route path='/cars' exact component={Card}/>
+
         </div>
       </>
 

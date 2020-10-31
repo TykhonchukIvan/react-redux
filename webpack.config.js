@@ -24,6 +24,17 @@ module.exports = {
       },
     ]
   },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './dist',
+    watchOptions: {
+      //poll: true,
+    },
+    hot: true,
+    open: false,
+    host: 'localhost',
+    port: 3333,
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "./src/index.html"),
