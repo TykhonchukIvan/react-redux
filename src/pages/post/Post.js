@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {getPostsSaga} from '../../redux/action/actionPostPage';
+import PostBox from '../../components/postBox/PostBox.jsx';
+import './post.less'
 
 class Post extends React.Component {
   constructor(props) {
@@ -13,10 +15,23 @@ class Post extends React.Component {
 
   render() {
 
-    console.log(this.props.posts)
+    const {posts} = this.props
+
+    let postsMap = null
+    if (posts.length > 0) {
+      postsMap = posts.map((post, index) => {
+        return (
+          <PostBox key={index} title={post.title} body={post.title} number={1+index}/>
+        )
+      })
+    }
 
     return (
-      <div>Post</div>
+      <div className='post-wrapper'>
+        <div className='post-wrapper__server-posts'>
+          {postsMap}
+        </div>
+      </div>
     )
   }
 }
