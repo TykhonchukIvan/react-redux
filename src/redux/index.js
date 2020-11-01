@@ -1,3 +1,6 @@
-export default function (state) {
-  return state
-}
+import {combineReducers} from 'redux'
+import reducerPostPage from './reducers/reducerPostPage';
+
+export default combineReducers({
+  reducerPost: reducerPostPage
+})

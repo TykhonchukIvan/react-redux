@@ -14,7 +14,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <Header/>
         <Switch>
           <Route path='/' exact component={Home}/>
@@ -22,7 +22,7 @@ export default class App extends React.Component {
           <Route path='/todo' component={Todo}/>
           <Redirect to={'/'}/>
         </Switch>
-      </div>
+      </>
     )
   }
 

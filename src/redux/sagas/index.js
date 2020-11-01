@@ -1,6 +1,6 @@
 import {all} from 'redux-saga/effects';
-import {sagas} from './saga';
+import {sagasPost} from './sagaPostPage';
 
 export default function* () {
-  yield all([...sagas]);
+  yield all([...sagasPost]);
 }
