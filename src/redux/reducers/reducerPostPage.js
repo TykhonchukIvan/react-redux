@@ -3,6 +3,7 @@ import {actionPostType} from '../actionTypes/actionTypesPage';
 const initialState = {
   postsServer: [],
   indexMap: null,
+  isShowComments: false,
   isLoading: true
 }
 
