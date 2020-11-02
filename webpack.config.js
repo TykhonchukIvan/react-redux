@@ -19,7 +19,7 @@ module.exports = {
         }
       },
       {
-        test: /\.less$/,
+        test: [/\.less$/, /\.css$/],
         use: [CssWebpackPlugin.loader, "css-loader", "less-loader"]
       },
     ]

@@ -1,7 +1,9 @@
 import {actionPostType} from '../actionTypes/actionTypesPage';
 
 const initialState = {
-  postsServer: []
+  postsServer: [],
+  indexMap: null,
+  isLoading: true
 }
 
 export default function reducerPostPage(state = initialState, action) {
@@ -11,6 +13,16 @@ export default function reducerPostPage(state = initialState, action) {
       return {
         ...state,
         postsServer: action.payload,
+      }
+    case actionPostType.CHANGE_IS_SHOW_COMMENT:
+      return {
+        ...state,
+        indexMap: action.payload,
+      }
+    case actionPostType.IS_SHOW_LOADING_POST_SERVER:
+      return {
+        ...state,
+        isLoading: action.payload,
       }
     default:
       return state
