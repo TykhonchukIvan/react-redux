@@ -1,7 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
-import {getPostsSaga, getPostsUserIdSaga, onHandlerIsShowComment} from '../../redux/action/actionPostPage';
+import {
+  getPostsSaga,
+  getPostsUserIdSaga,
+  onHandlerIsShowComment,
+  onHideComment} from '../../redux/action/actionPostPage';
 import PostBox from '../../components/postBox/PostBox.jsx';
 import ShowBtn from '../../components/showBtn/ShowBtn.jsx';
 import ChangeBtn from '../../components/changeBtn/ChangeBtn.jsx';
@@ -23,6 +28,15 @@ class Post extends React.Component {
 
     const {posts, isShowComment} = this.props
 
+    const isCheckShowComment = (a, b) => {
+
+      if(a === true && b === true) {
+        return true
+      } else {
+        return false
+      }
+    }
+
     let postsMap = null
     if (posts.length > 0) {
       postsMap = posts.map((post, index) => {
@@ -35,17 +49,24 @@ class Post extends React.Component {
                      userId={posts.userId}
                      isShowComment={isShowComment}>
               <div className='container__post-btnShow'>
-                <ShowBtn name={'Show comment'} onClick={()=>this.props.onHandlerIsShowCommentPost(index)}>
-                  {this.props.isShowComments ? <AiOutlineEyeInvisible/> : <AiOutlineEye/>}
+                <ShowBtn name={'Show comment'} onClick={() => {
+                  if (this.props.isShowComments === true) {
+                    this.props.hideComment()
+                  } else {
+                    this.props.onHandlerIsShowCommentPost(index)
+                  }
+                }}>
+                  {isCheckShowComment(index === this.props.indexMap,this.props.isShowComments) ?
+                    <AiOutlineEyeInvisible/> : <AiOutlineEye/>}
                 </ShowBtn>
               </div>
             </PostBox>
-            {index === this.props.indexMap ? <CommentBox/> : null}
+            {isCheckShowComment(index === this.props.indexMap,this.props.isShowComments) ?
+              <CommentBox/> : null}
           </div>
         )
       })
     }
-
 
     return (
       <div className='post-wrapper'>
@@ -62,6 +83,8 @@ class Post extends React.Component {
   }
 }
 
+Post.propTypes = {}
+
 function mapStateToProps(state) {
   return {
     posts: state.reducerPost.postsServer,
@@ -73,6 +96,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    hideComment: () =>dispatch(onHideComment()),
     getPostWithServer: () => dispatch(getPostsSaga()),
     getPostsUserIdWithServer: () => dispatch(getPostsUserIdSaga()),
     onHandlerIsShowCommentPost: (index) => dispatch(onHandlerIsShowComment(index))

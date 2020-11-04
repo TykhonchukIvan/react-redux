@@ -2,7 +2,7 @@ import {actionPostType} from '../actionTypes/actionTypesPage';
 
 export function getPostsSaga() {
   return {
-    type: actionPostType.GET_POSTS_SAGA
+    type: actionPostType.GET_POSTS_SAGA,
   }
 }
 
@@ -30,5 +30,11 @@ export function onChangeShowLoading(value) {
   return {
     type: actionPostType.IS_SHOW_LOADING_POST_SERVER,
     payload: value
+  }
+}
+
+export function onHideComment() {
+  return {
+    type: actionPostType.HIDE_IS_COMMENT,
   }
 }
