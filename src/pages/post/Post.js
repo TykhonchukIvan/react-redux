@@ -6,7 +6,8 @@ import {
   getPostsSaga,
   getPostsUserIdSaga,
   onHandlerIsShowComment,
-  onHideComment} from '../../redux/action/actionPostPage';
+  onHideComment
+} from '../../redux/action/actionPostPage';
 import PostBox from '../../components/postBox/PostBox.jsx';
 import ShowBtn from '../../components/showBtn/ShowBtn.jsx';
 import ChangeBtn from '../../components/changeBtn/ChangeBtn.jsx';
@@ -30,7 +31,7 @@ class Post extends React.Component {
 
     const isCheckShowComment = (a, b) => {
 
-      if(a === true && b === true) {
+      if (a === true && b === true) {
         return true
       } else {
         return false
@@ -50,18 +51,17 @@ class Post extends React.Component {
                      isShowComment={isShowComment}>
               <div className='container__post-btnShow'>
                 <ShowBtn name={'Show comment'} onClick={() => {
-                  if (this.props.isShowComments === true) {
+                  this.props.onHandlerIsShowCommentPost(index)
+                  if(index === this.props.indexMap && this.props.isShowComments){
                     this.props.hideComment()
-                  } else {
-                    this.props.onHandlerIsShowCommentPost(index)
                   }
                 }}>
-                  {isCheckShowComment(index === this.props.indexMap,this.props.isShowComments) ?
+                  {isCheckShowComment(index === this.props.indexMap, this.props.isShowComments) ?
                     <AiOutlineEyeInvisible/> : <AiOutlineEye/>}
                 </ShowBtn>
               </div>
             </PostBox>
-            {isCheckShowComment(index === this.props.indexMap,this.props.isShowComments) ?
+            {isCheckShowComment(index === this.props.indexMap, this.props.isShowComments) ?
               <CommentBox/> : null}
           </div>
         )
@@ -96,7 +96,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    hideComment: () =>dispatch(onHideComment()),
+    hideComment: () => dispatch(onHideComment()),
     getPostWithServer: () => dispatch(getPostsSaga()),
     getPostsUserIdWithServer: () => dispatch(getPostsUserIdSaga()),
     onHandlerIsShowCommentPost: (index) => dispatch(onHandlerIsShowComment(index))
