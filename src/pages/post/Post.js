@@ -2,16 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
-import {
-  getPostsSaga,
-  getPostsUserIdSaga,
-  onHandlerIsShowComment,
-  onHideComment
-} from '../../redux/action/actionPostPage';
+import {actionPostServer} from '../../redux/action/actionPostPage';
 import PostBox from '../../components/postBox/PostBox.jsx';
 import ShowBtn from '../../components/showBtn/ShowBtn.jsx';
 import ChangeBtn from '../../components/changeBtn/ChangeBtn.jsx';
-import CommentBox from '../../components/commentBox/ComentBox.jsx';
+import CommentBox from '../../components/commentBox/CommentBox.jsx';
 import Loading from '../../components/loading/Loading.jsx';
 
 import './post.less'
@@ -30,7 +25,6 @@ class Post extends React.Component {
     const {posts, isShowComment} = this.props
 
     const isCheckShowComment = (a, b) => {
-
       if (a === true && b === true) {
         return true
       } else {
@@ -46,13 +40,11 @@ class Post extends React.Component {
             <PostBox title={post.title}
                      body={post.body}
                      number={1 + index}
-                     id={posts.id}
-                     userId={posts.userId}
                      isShowComment={isShowComment}>
               <div className='container__post-btnShow'>
                 <ShowBtn name={'Show comment'} onClick={() => {
                   this.props.onHandlerIsShowCommentPost(index)
-                  if(index === this.props.indexMap && this.props.isShowComments){
+                  if (index === this.props.indexMap && this.props.isShowComments) {
                     this.props.hideComment()
                   }
                 }}>
@@ -62,7 +54,7 @@ class Post extends React.Component {
               </div>
             </PostBox>
             {isCheckShowComment(index === this.props.indexMap, this.props.isShowComments) ?
-              <CommentBox/> : null}
+              <CommentBox userId={post.userId} postId={post.id}/> : null}
           </div>
         )
       })
@@ -89,17 +81,17 @@ function mapStateToProps(state) {
   return {
     posts: state.reducerPost.postsServer,
     indexMap: state.reducerPost.indexMap,
-    isLoading: state.reducerPost.isLoading,
+    isLoading: state.reducerPost.isLoadingPosts,
     isShowComments: state.reducerPost.isShowComments,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    hideComment: () => dispatch(onHideComment()),
-    getPostWithServer: () => dispatch(getPostsSaga()),
-    getPostsUserIdWithServer: () => dispatch(getPostsUserIdSaga()),
-    onHandlerIsShowCommentPost: (index) => dispatch(onHandlerIsShowComment(index))
+    hideComment: () => dispatch(actionPostServer.onHideComment()),
+    getPostWithServer: () => dispatch(actionPostServer.getPostsSaga()),
+    getPostsUserIdWithServer: () => dispatch(actionPostServer.getPostsUserIdSaga()),
+    onHandlerIsShowCommentPost: (index) => dispatch(actionPostServer.onHandlerIsShowComment(index))
   }
 }
 

@@ -1,5 +1,6 @@
 import {getPostsUrl} from './constantsUrl';
 import {getPostsUrlUserId} from './constantsUrl';
+import {getCommentUrl} from './constantsUrl';
 
 export const apiRequestsPostPage = {
   getPosts: function getPosts() {
@@ -12,6 +13,11 @@ export const apiRequestsPostPage = {
     return fetch(getPostsUrlUserId + params, method)
       .then(response => response)
   },
+  getCommentPostID: function getCommentPostID(params) {
+    const method = {method: 'GET'}
+    return fetch(getCommentUrl + params, method)
+      .then(response => response)
+  }
 }
 
 

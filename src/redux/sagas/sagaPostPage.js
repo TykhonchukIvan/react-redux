@@ -1,6 +1,6 @@
 import {takeLatest, call, put} from 'redux-saga/effects';
 import {actionPostType} from '../actionTypes/actionTypesPage';
-import {setPostServer, onChangeShowLoading} from '../action/actionPostPage';
+import {actionPostServer} from '../action/actionPostPage';
 import {apiRequestsPostPage} from '../../api/apiRequests';
 
 const complexCompute = (num) => {
@@ -9,13 +9,19 @@ const complexCompute = (num) => {
   return num * 2;
 }
 
+function randomInteger(min, max) {
+  let rand = min + Math.random() * (max - min);
+  return Math.round(rand);
+}
+
 function* getPostsWithServerSaga() {
   try {
+    yield put(actionPostServer.onChangeShowLoadingPost(true))
     const response = yield call(apiRequestsPostPage.getPosts)
     if (response.status === 200) {
       const posts = yield response.json()
-      yield put(setPostServer(posts))
-      yield put(onChangeShowLoading(false))
+      yield put(actionPostServer.setPostServer(posts))
+      yield put(actionPostServer.onChangeShowLoadingPost(false))
     }
   } catch (e) {
     console.error(e, 'getPostsWithServerSaga')
@@ -23,30 +29,45 @@ function* getPostsWithServerSaga() {
 }
 
 function* getPostsUserIDWithServerSaga() {
-  function randomInteger(min, max) {
-    let rand = min + Math.random() * (max - min);
-    return Math.round(rand);
-  }
 
   const userId = randomInteger(1, 9)
   const param = `userId=${userId}&_limit=5`
   try {
-    yield put(setPostServer([]))
-    yield put(onChangeShowLoading(true))
+    yield put(actionPostServer.setPostServer([]))
+    yield put(actionPostServer.onChangeShowLoadingPost(true))
     const response = yield call(apiRequestsPostPage.getPostsUserId, param)
     if (response.status === 200) {
       const posts = yield response.json()
       // timeAut
-      const number = yield call(complexCompute,1000)
-      yield put(setPostServer(posts))
-      yield put(onChangeShowLoading(false))
+      const number = yield call(complexCompute, 1000)
+      yield put(actionPostServer.setPostServer(posts))
+      yield put(actionPostServer.onChangeShowLoadingPost(false))
     }
   } catch (e) {
     console.error(e, 'getPostsUserIDWithServerSaga')
   }
 }
 
+function* getCommentsWithServerSaga(action) {
+  const postId = action.payload
+  const param = `${postId}/comments`
+  try {
+    yield put(actionPostServer.setCommentsSaga([]))
+    yield put(actionPostServer.onChangeShowLoadingComments(true))
+    const response = yield call(apiRequestsPostPage.getCommentPostID, param)
+    if (response.status === 200) {
+      const comments = yield response.json()
+      const number = yield call(complexCompute, 1000)
+      yield put(actionPostServer.setCommentsSaga(comments))
+      yield put(actionPostServer.onChangeShowLoadingComments(false))
+    }
+  } catch (e) {
+    console.error(e, 'getCommentsWithServerSaga')
+  }
+}
+
 export const sagasPost = [
   takeLatest(actionPostType.GET_POSTS_SAGA, getPostsWithServerSaga),
   takeLatest(actionPostType.GET_POST_USERID_SAGA, getPostsUserIDWithServerSaga),
+  takeLatest(actionPostType.GET_COMMENTS_SAGA, getCommentsWithServerSaga)
 ]

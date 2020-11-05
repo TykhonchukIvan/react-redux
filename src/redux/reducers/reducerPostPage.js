@@ -4,7 +4,9 @@ const initialState = {
   postsServer: [],
   indexMap: null,
   isShowComments: false,
-  isLoading: true
+  isLoadingPosts: false,
+  isLoadingComments: false,
+  commentsServer: [],
 }
 
 export default function reducerPostPage(state = initialState, action) {
@@ -16,14 +18,12 @@ export default function reducerPostPage(state = initialState, action) {
         postsServer: action.payload,
       }
     case actionPostType.CHANGE_IS_SHOW_COMMENT:
-      console.log('actionPostType.HIDE_IS_COMMENT:', true, state.isShowComments)
       return {
         ...state,
         isShowComments: true,
         indexMap: action.payload,
       }
     case actionPostType.HIDE_IS_COMMENT:
-      console.log('actionPostType.HIDE_IS_COMMENT:', false, state.isShowComments)
       return {
         ...state,
         isShowComments: false,
@@ -31,7 +31,17 @@ export default function reducerPostPage(state = initialState, action) {
     case actionPostType.IS_SHOW_LOADING_POST_SERVER:
       return {
         ...state,
-        isLoading: action.payload,
+        isLoadingPosts: action.payload,
+      }
+    case actionPostType.SET_COMMENTS_SERVER:
+      return {
+        ...state,
+        commentsServer: action.payload,
+      }
+    case actionPostType.IS_SHOW_LOADING_COMMENTS_SERVER:
+      return  {
+        ...state,
+        isLoadingComments: action.payload,
       }
     default:
       return state
