@@ -7,6 +7,7 @@ import PostBox from '../../components/postBox/PostBox.jsx';
 import ShowBtn from '../../components/showBtn/ShowBtn.jsx';
 import ChangeBtn from '../../components/changeBtn/ChangeBtn.jsx';
 import CommentBox from '../../components/commentBox/CommentBox.jsx';
+import CreatePosts from '../../components/createPosts/CreatePosts.jsx';
 import Loading from '../../components/loading/Loading.jsx';
 
 import './post.less'
@@ -70,8 +71,20 @@ class Post extends React.Component {
               <Loading/>
             </div> : null}
         </div>
+        <div className='post-wrapper__create-posts'>
+          <div className='post-wrapper__create-posts-title'>{'Create posts'}</div>
+          <CreatePosts/>
+        </div>
       </div>
     )
+    // return (
+    //     <div className='post-wrapper'>
+    //       <div className='post-wrapper__create-posts'>
+    //         <div className='post-wrapper__create-posts-title'>{'Created posts'}</div>
+    //         <CreatePosts/>
+    //       </div>
+    //     </div>
+    // )
   }
 }
 
