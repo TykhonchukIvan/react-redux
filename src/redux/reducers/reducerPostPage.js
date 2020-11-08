@@ -7,6 +7,8 @@ const initialState = {
   isLoadingPosts: false,
   isLoadingComments: false,
   commentsServer: [],
+  createPostInputValue: '',
+  createPostTextareaValue: '',
 }
 
 export default function reducerPostPage(state = initialState, action) {
@@ -39,7 +41,7 @@ export default function reducerPostPage(state = initialState, action) {
         commentsServer: action.payload,
       }
     case actionPostType.IS_SHOW_LOADING_COMMENTS_SERVER:
-      return  {
+      return {
         ...state,
         isLoadingComments: action.payload,
       }

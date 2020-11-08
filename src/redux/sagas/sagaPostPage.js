@@ -66,8 +66,13 @@ function* getCommentsWithServerSaga(action) {
   }
 }
 
+function* createPostSaga(action){
+  console.log(action.payload)
+}
+
 export const sagasPost = [
   takeLatest(actionPostType.GET_POSTS_SAGA, getPostsWithServerSaga),
   takeLatest(actionPostType.GET_POST_USERID_SAGA, getPostsUserIDWithServerSaga),
-  takeLatest(actionPostType.GET_COMMENTS_SAGA, getCommentsWithServerSaga)
+  takeLatest(actionPostType.GET_COMMENTS_SAGA, getCommentsWithServerSaga),
+  takeLatest(actionPostType.ADD_POST_VALUE_SAGA, createPostSaga)
 ]
