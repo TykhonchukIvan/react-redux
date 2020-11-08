@@ -2,9 +2,12 @@ import React from 'react';
 import './createPostsTextarea.less';
 
 function CreatePostsTextarea(props) {
-  const {value, onChange} = props
+  const {value, onChange, style} = props
   return (
-    <textarea className='create-post-textarea' value={value} onChange={onChange}/>
+    <textarea className='create-post-textarea'
+              value={value}
+              onChange={onChange}
+              style={style}/>
   )
 }
 

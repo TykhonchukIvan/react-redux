@@ -9,6 +9,15 @@ const initialState = {
   commentsServer: [],
   createPostInputValue: '',
   createPostTextareaValue: '',
+  errorValidTitle: {
+    isErrorValid: false,
+    errorText: '',
+  },
+  errorValidBody: {
+    isErrorValid: false,
+    errorText: '',
+  },
+  createdPosts: []
 }
 
 export default function reducerPostPage(state = initialState, action) {
@@ -44,6 +53,29 @@ export default function reducerPostPage(state = initialState, action) {
       return {
         ...state,
         isLoadingComments: action.payload,
+      }
+    case actionPostType.CHECK_VALUE_TITLE:
+      return {
+        ...state,
+        ...state.errorValidTitle,
+        errorValidTitle: {
+          isErrorValid: action.payload.isErrorValid,
+          errorText: action.payload.errorText,
+        }
+      }
+    case actionPostType.CHECK_VALUE_BODY:
+      return {
+        ...state,
+        ...state.errorValidBody,
+        errorValidBody: {
+          isErrorValid: action.payload.isErrorValid,
+          errorText: action.payload.errorText,
+        }
+      }
+    case actionPostType.ADD_CREATED_POSTS:
+      return {
+        ...state,
+        createdPosts: [...state.createdPosts, action.payload]
       }
     default:
       return state

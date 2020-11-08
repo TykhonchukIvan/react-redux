@@ -53,11 +53,28 @@ export const actionPostServer = {
     }
   },
   addPostValueSaga: function addPostValueSaga(value) {
-    console.log('ads')
       return {
         type: actionPostType.ADD_POST_VALUE_SAGA,
         payload: value
       }
+  },
+  checkValueTitle: function checkValueTitle(value){
+    return {
+      type: actionPostType.CHECK_VALUE_TITLE,
+      payload: value
+    }
+  },
+  checkValueBody: function checkValueTitle(value){
+    return {
+      type: actionPostType.CHECK_VALUE_BODY,
+      payload: value
+    }
+  },
+  addCreatedPosts: function addCreatedPosts(value){
+    return{
+      type: actionPostType.ADD_CREATED_POSTS,
+      payload: value
+    }
   }
 }
 

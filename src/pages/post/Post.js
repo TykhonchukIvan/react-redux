@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
 import {actionPostServer} from '../../redux/action/actionPostPage';
@@ -23,7 +22,7 @@ class Post extends React.Component {
 
   render() {
 
-    const {posts, isShowComment} = this.props
+    const {postsServer, isShowComment, createdPosts} = this.props
 
     const isCheckShowComment = (a, b) => {
       if (a === true && b === true) {
@@ -33,9 +32,9 @@ class Post extends React.Component {
       }
     }
 
-    let postsMap = null
-    if (posts.length > 0) {
-      postsMap = posts.map((post, index) => {
+    let postsServerMap = null
+    if (postsServer.length > 0) {
+      postsServerMap = postsServer.map((post, index) => {
         return (
           <div key={index}>
             <PostBox title={post.title}
@@ -61,11 +60,24 @@ class Post extends React.Component {
       })
     }
 
+    let postsCreated = null
+    if (createdPosts.length > 0) {
+      postsCreated = createdPosts.map((post, index) => {
+        return (
+          <div key={index}>
+            <PostBox title={post.title}
+                     body={post.body}
+                     number={1 + index}/>
+          </div>
+        )
+      })
+    }
+
     return (
       <div className='post-wrapper'>
         <div className='post-wrapper__server-posts'>
           <ChangeBtn onClick={() => this.props.getPostsUserIdWithServer()} name={'Change post'}/>
-          {postsMap}
+          {postsServerMap}
           {this.props.isLoading ?
             <div style={{width: '380px', height: '300px'}}>
               <Loading/>
@@ -74,17 +86,10 @@ class Post extends React.Component {
         <div className='post-wrapper__create-posts'>
           <div className='post-wrapper__create-posts-title'>{'Create posts'}</div>
           <CreatePosts/>
+          {postsCreated}
         </div>
       </div>
     )
-    // return (
-    //     <div className='post-wrapper'>
-    //       <div className='post-wrapper__create-posts'>
-    //         <div className='post-wrapper__create-posts-title'>{'Created posts'}</div>
-    //         <CreatePosts/>
-    //       </div>
-    //     </div>
-    // )
   }
 }
 
@@ -92,7 +97,8 @@ Post.propTypes = {}
 
 function mapStateToProps(state) {
   return {
-    posts: state.reducerPost.postsServer,
+    createdPosts: state.reducerPost.createdPosts,
+    postsServer: state.reducerPost.postsServer,
     indexMap: state.reducerPost.indexMap,
     isLoading: state.reducerPost.isLoadingPosts,
     isShowComments: state.reducerPost.isShowComments,

@@ -7,7 +7,6 @@ import {actionPostServer} from '../../redux/action/actionPostPage';
 
 import './createPosts.less';
 
-
 class CreatePosts extends React.Component {
   constructor(props) {
     super(props);
@@ -35,15 +34,36 @@ class CreatePosts extends React.Component {
   render() {
     return (
       <div className='container-create-post'>
-        <div className='container-create-post__title'>
-          <div>{'Title'}</div>
-          <CreatePostInput value={this.state.valueInput} onChange={this.onChangeInput}/>
+
+        <div className='container-create-post__title'
+             style={this.props.errorTitle.isErrorValid ? {} : {marginTop: '5px'}}>
+        <div>{'Title'}</div>
+          <CreatePostInput value={this.state.valueInput}
+                           style={this.props.errorTitle.isErrorValid ? {border: '2px solid #b10101'}
+                           : null}
+                           onChange={this.onChangeInput}/>
         </div>
-        <div className='container-create-post__body'>
+
+        {this.props.errorTitle.isErrorValid &&
+        (<div className='container-create-post__title-error'>
+          <div>{this.props.errorTitle.errorText}</div>
+        </div>)}
+
+        <div className='container-create-post__body'
+             style={this.props.errorBody.isErrorValid ? {} : {marginTop: '5px'}}>
           <span>{'Post'}</span>
-          <CreatePostsTextarea value={this.state.valueTextarea} onChange={this.onChangeTextarea}/>
+          <CreatePostsTextarea value={this.state.valueTextarea}
+                               style={this.props.errorBody.isErrorValid ? {border: '2px solid #b10101'}
+                                 : null}
+                               onChange={this.onChangeTextarea}/>
         </div>
-        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+
+        {this.props.errorBody.isErrorValid &&
+        (<div className='container-create-post__body-error'>
+          <div>{this.props.errorBody.errorText}</div>
+        </div>)}
+
+        <div style={{display: 'flex', justifyContent: 'flex-end',}}>
           <CreatePostBtn name={'Add post'} onClick={() => this.props.addPostValue(
             {title: this.state.valueInput, body: this.state.valueTextarea})}/>
         </div>
@@ -53,7 +73,10 @@ class CreatePosts extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {}
+  return {
+    errorTitle: state.reducerPost.errorValidTitle,
+    errorBody: state.reducerPost.errorValidBody,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
