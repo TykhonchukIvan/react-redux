@@ -1,0 +1,51 @@
+.container {
+  margin: 10px auto 0;
+  max-width: 400px;
+  padding: 5px 10px;
+  border: 1px solid #0C202E;
+  border-radius: 5px;
+
+  &__post-box {
+    display: flex;
+    justify-content: flex-start;
+
+    &--number {
+      max-width: 50px;
+      user-select: none;
+      color: #0C202E;
+      display: flex;
+      align-items: center;
+    }
+
+    &--body {
+      margin-left: 10px;
+      max-width: 350px;
+      text-align: justify;
+
+      div span {
+        user-select: none;
+        color: #ff8600;
+        font-weight: 400;
+      }
+
+      div {
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+      div:nth-child(2n) {
+        margin-top: 5px;
+      }
+    }
+  }
+
+  &__post-btnShow {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.container:hover {
+  transition: border, box-shadow .3s;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14);
+}
