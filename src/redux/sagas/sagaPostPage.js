@@ -95,8 +95,6 @@ function* createPostSaga(action) {
     yield delay(1000);
     yield put(actionPostServer.addCreatedPosts(data))
   }
-
-
 }
 
 export const sagasPost = [
