@@ -2,12 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
 import {actionPostServer} from '../../redux/action/actionPostPage';
-import PostBox from '../../components/postBox/PostBox.jsx';
-import ShowBtn from '../../components/showBtn/ShowBtn.jsx';
-import ChangeBtn from '../../components/changeBtn/ChangeBtn.jsx';
-import CommentBox from '../../components/commentBox/CommentBox.jsx';
-import CreatePosts from '../../components/createPosts/CreatePosts.jsx';
-import Loading from '../../components/loading/Loading.jsx';
+import PostBox from '../../components/components_post/postBox/PostBox.jsx';
+import ShowBtn from '../../components/components_post/showBtn/ShowBtn.jsx';
+import ChangeBtn from '../../components/components_post/changeBtn/ChangeBtn.jsx';
+import CommentBox from '../../components/components_post/commentBox/CommentBox.jsx';
+import CreatePosts from '../../components/components_post/createPosts/CreatePosts.jsx';
+import Loading from '../../components/components_post/loading/Loading.jsx';
 
 import './post.less'
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
-import Header from './components/header';
+import Header from './components/components_post/header';
 import Home from './pages/home';
 import Post from './pages/post';
 import Todo from './pages/todo';

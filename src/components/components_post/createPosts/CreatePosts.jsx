@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import CreatePostInput from './createPostsInput/createPostsInput.jsx';
 import CreatePostsTextarea from './createPostsTextarea/createPostsTextarea.jsx';
 import CreatePostBtn from './crearePostBtn/CreatePostBtn.jsx';
-import {actionPostServer} from '../../redux/action/actionPostPage';
+import {actionPostServer} from '../../../redux/action/actionPostPage';
 
 import './createPosts.less';
 

@@ -46,6 +46,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.3.0",
     "radium": "^0.26.1",
     "react-icons": "^3.11.0",
     "redux-thunk": "^2.3.0"

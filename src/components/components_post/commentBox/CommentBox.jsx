@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {actionPostServer} from '../../redux/action/actionPostPage';
+import {actionPostServer} from '../../../redux/action/actionPostPage';
 import Loading from '../loading/Loading.jsx';
 import Comment from './Comment/Comment.jsx';
 
