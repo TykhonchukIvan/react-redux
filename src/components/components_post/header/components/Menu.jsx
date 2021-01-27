@@ -10,12 +10,6 @@ function Menu() {
             <NavLink to={{pathname: '/'}}
                      exact
                      activeClassName={'wfm-active'}>
-              Home</NavLink>
-          </li>
-          <li>
-            <NavLink to={{pathname: '/post'}}
-                     exact
-                     activeClassName={'wfm-active'}>
               Post</NavLink>
           </li>
           <li>
