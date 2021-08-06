@@ -1,0 +1,49 @@
+.comment-box {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+
+  &__container {
+    border: 1px solid #0C202E;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 5px;
+    border-radius: 5px;
+
+    &--header {
+      max-width: 350px;
+      display: flex;
+      justify-content: flex-start;
+
+      &-icon {
+        display: flex;
+        align-items: center;
+
+        svg {
+          color: #0C202E;
+          width: 40px;
+        }
+      }
+
+      &-title {
+        div {
+          span {
+            user-select: none;
+            color: #ff8600;
+          }
+        }
+      }
+    }
+
+    &--body {
+      max-width: 350px;
+      margin-left: 40px;
+      text-align: justify;
+
+      span {
+        user-select: none;
+        color: #ff8600;
+      }
+    }
+  }
+}
